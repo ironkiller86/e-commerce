@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Header from "./components/Header/Header";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import Header from './components/header';
+import Footer from './components/footer';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "E-commerce",
-  description: "A beautiful fake e-commerce",
+  title: 'E-commerce',
+  description: 'A beautiful fake e-commerce',
 };
 
 export default function RootLayout({
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Header />
         {children}
+        <Footer/>
       </body>
     </html>
   );
