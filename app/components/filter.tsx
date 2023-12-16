@@ -1,10 +1,11 @@
 'use client';
 
 import Select from './select';
+import Image from 'next/image';
 
 export default function Filter() {
   return (
-    <section className="w-full mt-[60px]  border-b-[1px] border-gray">
+    <section className="w-full mt-[60px]  border-b-[1px] border-gray h-[110px]">
       <div>
         <p className="text-[13px] text-[#4A4A4A]">Home / Donna</p>
       </div>
@@ -31,20 +32,12 @@ export default function Filter() {
               id="check"
             />
             <span className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-3.5 w-3.5"
-                viewBox="0 0 20 20"
-                fill="#E42313"
-                stroke="#E42313"
-                strokeWidth="1"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
+              <Image
+                src="/icons/check.svg"
+                alt="check"
+                width={20}
+                height={20}
+              />
             </span>
           </label>
           <label htmlFor="check">Solo disponibili</label>

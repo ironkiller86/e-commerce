@@ -1,16 +1,19 @@
+import { Product } from '@/types';
 import Card from './card';
 
-const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-export default function ItemList() {
+
+export default function ItemList({ products }: { products: Product[] }) {
   return (
     <section>
       <div className="flex flex-row flex-wrap items-center gap-[20px] mt-[34px] justify-center">
-        {arr.map((item) => (
-          <Card key={item} />
+        {products?.map((product) => (
+          <Card key={product.id} product={product} />
         ))}
       </div>
-      <div className="mt-[40px] flex  items-center justify-center">pagination</div>
+      <div className="mt-[40px] flex  items-center justify-center">
+        pagination
+      </div>
     </section>
   );
 }
