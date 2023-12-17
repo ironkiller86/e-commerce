@@ -7,8 +7,11 @@ import { Product } from '@/types';
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-async function getProducts() {
-  const res = await fetch(`https://api.escuelajs.co/api/v1/products`);
+export async function getProducts(url?: string) {
+  const res = await fetch(
+    url || `${BASE_URL}${ENDPOINT.products}?offset=1&limit=10`,
+    /*  `https://api.escuelajs.co/api/v1/products?offset=2&limit=10` */
+  );
 
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
@@ -27,7 +30,6 @@ export default async function Home() {
   return (
     <main className="px-[104px]">
       <section>
-        <Filter />
         <ItemList products={products} />
       </section>
     </main>

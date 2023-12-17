@@ -1,14 +1,21 @@
-import SelectComponent from 'react-select';
+import Select from 'react-select';
 
 const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
+  { value: '1', label: 'Vestiti' },
+  { value: '2', label: 'Elettronica' },
+  { value: '3', label: 'Mobili' },
+  { value: '4', label: 'Scarpe' },
+  { value: '5', label: 'Varie' },
+  { value: '6', label: 'Piante' },
 ];
 
-export default function Select() {
+export default function SelectComponent({
+  onChange,
+}: {
+  onChange: (option: { value: string; label: string }) => void;
+}) {
   return (
-    <SelectComponent
+    <Select
       styles={{
         control: (baseStyles, state) => ({
           ...baseStyles,
@@ -23,7 +30,7 @@ export default function Select() {
         }),
         menu: (baseStyles, state) => ({
           ...baseStyles,
-          backgroundColor: state.is ? '#EDEDED' : 'white',
+          /*  backgroundColor: state.is ? '#EDEDED' : 'white', */
 
           color: 'white',
         }),
@@ -53,6 +60,9 @@ export default function Select() {
         }),
       }}
       options={options}
+      onChange={(option: { value: string; label: string }) => {
+        onChange(option);
+      }}
       className="w-[184px]"
     />
   );

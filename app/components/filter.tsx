@@ -3,7 +3,19 @@
 import Select from './select';
 import Image from 'next/image';
 
-export default function Filter() {
+export default function Filter({
+  handlePrice,
+  filtersData,
+  handleSelect
+}: {
+  handlePrice: (evt: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSelect: (selectedData: { value: string; label: string }) => void;
+  filtersData: {
+    category: string;
+    minPrice: string;
+    maxPrice: string;
+  };
+}) {
   return (
     <section className="w-full mt-[60px]  border-b-[1px] border-gray h-[110px]">
       <div>
@@ -11,12 +23,20 @@ export default function Filter() {
       </div>
       <div className="flex flex-row justify-between items-center mt-3">
         <div className="flex flex-row gap-[25px]  items-center">
-          <Select />
+          <Select onChange={handleSelect} />
           <input
+            value={filtersData.minPrice}
+            onChange={handlePrice}
+            name="minPrice"
+            placeholder="Prezzo Minimo"
             type="number"
             className="w-[184px] border-[1px] border-[#cccccc]  rounded-[5px] h-10 px-[10px]"
           />
           <input
+            value={filtersData.maxPrice}
+            onChange={handlePrice}
+            name="maxPrice"
+            placeholder="Prezzo Massimo"
             type="number"
             className="w-[184px] border-[1px] border-[#cccccc]  rounded-[5px] h-10 px-[10px]"
           />

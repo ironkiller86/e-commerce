@@ -35,12 +35,14 @@ export default function Header() {
         </div>
         <div className="px-[104px] py-[30px] flex flex-row  justify-between  items-center border-b-[1px] border-gray">
           <div>
-            <Image
-              src="/icons/logo.svg"
-              alt="logo"
-              width={82.17}
-              height={36.12}
-            />
+            <Link href="/">
+              <Image
+                src="/icons/logo.svg"
+                alt="logo"
+                width={82.17}
+                height={36.12}
+              />
+            </Link>
           </div>
           <span className="relative">
             <input className="border-[1px] border-[#cccccc] w-[400px] rounded-[5px] h-10 pl-[10px] pr-10" />
@@ -69,11 +71,11 @@ export default function Header() {
           </ul>
         </div>
         <div className="px-[104px] border-b-[1px] border-gray">
-          <ul className="flex flex-row  gap-10   h-[45px]">
+          <ul className="flex flex-row  gap-10   h-[45px] items-center">
             {MOCK.targetList.map((target) => (
               <li
                 key={target}
-                className="flex items-center h-full text-[13px] font-[800]  hover:text-red hover:border-b-[3px] border-b-red cursor-pointer"
+                className="flex items-center border-t-[3px] border-t-white h-full text-[13px] font-[800]  hover:text-red hover:border-b-[3px] border-b-red cursor-pointer"
               >
                 {target}
               </li>
