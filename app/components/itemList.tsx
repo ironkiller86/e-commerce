@@ -7,10 +7,25 @@ import { useEffect, useRef, useState } from 'react';
 import { getProducts } from '../page';
 import { BASE_URL, ENDPOINT } from '@/constants';
 
-export default function ItemList({ products }: { products: Product[] }) {
-  const [data, setData] = useState<{ isLoading: boolean; products: Product[] }>(
+import { useSearchParams, useRouter } from 'next/navigation';
+
+export default function ItemList({
+  products,
+  productsLength,
+}: {
+  products: Product[];
+  productsLength: number;
+}) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const page = searchParams.get('page') ?? '1';
+  const per_page = searchParams.get('per_page') ?? '3';
+
+  const pp = Number(per_page);
+
+  /*   const [data, setData] = useState<{ isLoading: boolean; products: Product[] }>(
     { isLoading: false, products: [] },
-  );
+  ); */
   const [filters, setFilters] = useState<{
     category: string;
     minPrice: string;
@@ -27,17 +42,14 @@ export default function ItemList({ products }: { products: Product[] }) {
   };
 
   const handleSelect = (selectedData: { value: string; label: string }) => {
+    /*   router.push(`/?categoryId=${parseInt(selectedData.value)}`); */
     setFilters((prevState) => ({
       ...prevState,
       category: selectedData.value,
     }));
   };
 
-  useEffect(() => {
-    console.log('filters', filters);
-  }, [filters]);
-
-  useEffect(() => {
+  /*  useEffect(() => {
     const fetchData = async () => {
       let queryString = '';
       if (filters.category) {
@@ -58,6 +70,22 @@ export default function ItemList({ products }: { products: Product[] }) {
       }));
     };
     if (filters.category || filters.minPrice || filters.maxPrice) fetchData();
+  }, [filters.category, filters.minPrice, filters.maxPrice]); */
+
+  useEffect(() => {
+    if (filters.category) {
+      router.push(`/?categoryId=${parseInt(filters.category)}`);
+    }
+
+    if (filters.minPrice && filters.maxPrice) {
+      router.push(
+        `/?price_min=${filters.minPrice}&price_max=${filters.maxPrice}`,
+      );
+    }
+
+    /*     if (filters.category) {
+      router.push(`/?categoryId=${parseInt(filters.category)}`);
+    } */
   }, [filters.category, filters.minPrice, filters.maxPrice]);
 
   return (
@@ -68,12 +96,20 @@ export default function ItemList({ products }: { products: Product[] }) {
         handleSelect={handleSelect}
       />
       <div className="flex flex-row flex-wrap items-center gap-[20px] mt-[34px] justify-center">
-        {data.products?.map((product) => (
+        {products?.map((product) => (
           <Card key={product.id} product={product} />
         ))}
       </div>
       <div className="flex flex-row items-center gap-[30px] mt-[25px] justify-center">
-        <button>
+        <button
+          onClick={() => {
+            router.push(
+              `/?page=${Number(page) - 1}&per_page=${per_page}&categoryId=${
+                filters.category
+              }&price_min=${filters.minPrice}&price_max=${filters.maxPrice}`,
+            );
+          }}
+        >
           <Image
             src="/icons/arrow-left.svg"
             alt="arrow left"
@@ -81,8 +117,18 @@ export default function ItemList({ products }: { products: Product[] }) {
             height={22.62}
           />
         </button>
-        <p>1 di 26</p>
-        <button>
+        <p>
+          {page} di {Math.ceil(productsLength / Number(per_page))}
+        </p>
+        <button
+          onClick={() => {
+            router.push(
+              `/?page=${Number(page) + 1}&per_page=${per_page}&categoryId=${
+                filters.category
+              }&price_min=${filters.minPrice}&price_max=${filters.maxPrice}`,
+            );
+          }}
+        >
           <Image
             src="/icons/arrow-right.svg"
             alt="arrow right"
