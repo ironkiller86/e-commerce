@@ -4,6 +4,12 @@ export type Category = {
   image: string;
 };
 
+export type Filters = {
+  category: string;
+  minPrice: string;
+  maxPrice: string;
+};
+
 export type Product = {
   id: number;
   title: string;
