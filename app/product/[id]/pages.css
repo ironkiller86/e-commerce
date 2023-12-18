@@ -1,0 +1,50 @@
+.imgContainer {
+  display: block;
+  width: 707px;
+  height: 100%;
+  position: relative;
+}
+
+.smallImgContainer {
+  display: block;
+  width: 300px;
+  height: 300px;
+  position: relative;
+}
+
+.imagePreview {
+  object-fit: contain;
+}
+
+@media (min-width: 1481px) and (max-width: 2000px) {
+  .imgContainer {
+    height: 900px;
+    width: 900px;
+  }
+  .smallImgContainer {
+    width: 425px;
+    height: 425px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1480px) {
+  .imgContainer {
+    height: 600px;
+    width: 600px;
+  }
+  .smallImgContainer {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .imgContainer {
+    height: 500px;
+    width: 500px;
+  }
+  .smallImgContainer {
+    width: 240px;
+    height: 240px;
+  }
+}
