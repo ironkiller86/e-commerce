@@ -16,10 +16,11 @@ const config: Config = {
     },
     colors: {
       gray: '#ededed',
+      secondaryGray: '#4A4A4A',
       black: '#000000',
       red: '#e32118',
-      green: 'green',
       white: '#fff',
+      green: '#509C50',
     },
   },
   plugins: [],
