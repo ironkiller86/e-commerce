@@ -1,6 +1,7 @@
 import Select from 'react-select';
 
 const options = [
+  { value: '', label: 'Tutte' },
   { value: '1', label: 'Vestiti' },
   { value: '2', label: 'Elettronica' },
   { value: '3', label: 'Mobili' },
@@ -60,6 +61,7 @@ export default function SelectComponent({
         }),
       }}
       options={options}
+      defaultValue={{ value: '', label: 'Tutte' }}
       onChange={(option: { value: string; label: string }) => {
         onChange(option);
       }}
