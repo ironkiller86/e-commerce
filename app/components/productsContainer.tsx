@@ -5,8 +5,14 @@ import { useRouter } from 'next/navigation';
 import Card from './card';
 import { Product } from '@/types';
 import Pagination from './pagination';
+import { SingleValue } from 'react-select';
 
 const numberRegex = /^[0-9.]+$/;
+function getRandomInteger(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+const discount = getRandomInteger(5, 40);
 
 export default function ProductsContainer({
   products,
@@ -37,10 +43,12 @@ export default function ProductsContainer({
     } else setFilters((prevState) => ({ ...prevState, [name]: '' }));
   };
 
-  const handleSelect = (selectedData: { value: string; label: string }) => {
+  const handleSelect = (
+    selectedData: SingleValue<{ value: string; label: string }>,
+  ) => {
     setFilters((prevState) => ({
       ...prevState,
-      category: selectedData.value,
+      category: selectedData?.value || '',
       maxPrice: '',
       minPrice: '',
     }));
@@ -66,7 +74,7 @@ export default function ProductsContainer({
       />
       <div className="flex flex-row flex-wrap items-center gap-[20px] mt-[34px] justify-center min-h-[300px]">
         {products?.map((product) => (
-          <Card key={product.id} product={product} />
+          <Card key={product.id} product={product} discount={discount} />
         ))}
       </div>
       {paginationOptions.productsLength ? (

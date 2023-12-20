@@ -2,6 +2,7 @@
 import { Filters } from '@/types';
 import Select from './select';
 import Image from 'next/image';
+import { SingleValue } from 'react-select';
 
 export default function Filter({
   handlePrice,
@@ -9,7 +10,12 @@ export default function Filter({
   handleSelect,
 }: {
   handlePrice: (evt: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSelect: (selectedData: { value: string; label: string }) => void;
+  handleSelect: (
+    selectedData: SingleValue<{
+      value: string;
+      label: string;
+    }>,
+  ) => void;
   filtersData: Filters;
 }) {
   return (

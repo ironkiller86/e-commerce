@@ -1,4 +1,4 @@
-import Select from 'react-select';
+import Select, { SingleValue } from 'react-select';
 
 const options = [
   { value: '', label: 'Tutte' },
@@ -13,14 +13,13 @@ const options = [
 export default function SelectComponent({
   onChange,
 }: {
-  onChange: (option: { value: string; label: string }) => void;
+  onChange: (option: SingleValue<{ value: string; label: string }>) => void;
 }) {
   return (
     <Select
       styles={{
         control: (baseStyles, state) => ({
           ...baseStyles,
-          /*   borderColor: state.isFocused ? '#e32118' : '#000000', */
           borderRadius: '4px',
           minHeight: '40px',
         }),
@@ -31,8 +30,6 @@ export default function SelectComponent({
         }),
         menu: (baseStyles, state) => ({
           ...baseStyles,
-          /*  backgroundColor: state.is ? '#EDEDED' : 'white', */
-
           color: 'white',
         }),
         menuList: (baseStyles) => ({
@@ -62,8 +59,8 @@ export default function SelectComponent({
       }}
       options={options}
       defaultValue={{ value: '', label: 'Tutte' }}
-      onChange={(option: { value: string; label: string }) => {
-        onChange(option);
+      onChange={(newValue /* : { value: string; label: string } */) => {
+        onChange(newValue);
       }}
       className="w-[184px]"
     />
